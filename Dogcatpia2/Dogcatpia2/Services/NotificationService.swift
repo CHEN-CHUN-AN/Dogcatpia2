@@ -7,31 +7,39 @@
 
 import UserNotifications
 
-final class NotificationService {
+final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
     static let shared = NotificationService()
 
+    override private init() {
+        super.init()
+        UNUserNotificationCenter.current().delegate = self
+    }
+
     func requestPermission() {
         UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .sound]) { _, _ in }
+            .requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+    }
+
+    // 在 App 內不顯示通知，只有背景執行時才通知
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([])
     }
 
     func sendHighTemp(temp: Double, pet: PetType) {
         guard temp >= pet.highTempLimit else { return }
 
         let content = UNMutableNotificationContent()
-        content.title = "⚠️ 高溫警告"
-        content.body = "\(pet.rawValue) 環境溫度 \(temp)°C"
+        content.title = "🥵 哎呀！太熱了"
+        content.body = "現在 \(temp)°C，\(pet.rawValue) 快熱暈了！趕快開冷氣或通風喔！"
+        content.sound = .default
 
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: 1, repeats: false
-        )
-
+        // 立即傳送通知 (trigger = nil)
         UNUserNotificationCenter.current().add(
             UNNotificationRequest(
                 identifier: UUID().uuidString,
                 content: content,
-                trigger: trigger
+                trigger: nil
             )
         )
     }

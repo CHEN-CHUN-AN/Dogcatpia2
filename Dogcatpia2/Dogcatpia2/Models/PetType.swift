@@ -12,7 +12,7 @@ enum PetType: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 
     var highTempLimit: Double {
-        self == .cat ? 32 : 30
+        28
     }
 
     func comfortStatus(temp: Double, humidity: Double) -> (isComfortable: Bool, message: String, detail: String) {
@@ -28,20 +28,20 @@ enum PetType: String, CaseIterable, Identifiable {
 
         if !tempRange.contains(temp) {
             if temp < tempRange.lowerBound {
-                return (false, "太冷了！建議開暖氣 🥶", "目前 \(temp)°C，低於\(rawValue)舒適溫度 (\(Int(tempRange.lowerBound))~\(Int(tempRange.upperBound))°C)。\n建議準備保暖墊或開啟暖氣，以免感冒。")
+                return (false, "🥶 哎呀，有點冷呢！", "現在 \(temp)°C，對\(rawValue)來說有點太冷囉！\n快幫牠準備暖暖的窩或開個暖氣吧，小心別著涼了～")
             } else {
-                return (false, "太熱了！建議開冷氣 🥵", "目前 \(temp)°C，高於\(rawValue)舒適溫度 (\(Int(tempRange.lowerBound))~\(Int(tempRange.upperBound))°C)。\n請注意通風、補充水分，避免中暑風險。")
+                return (false, "🥵 呼～好熱喔！", "現在 \(temp)°C，\(rawValue)可能會覺得悶熱不舒服。\n記得保持通風、多給牠喝水，或者開冷氣涼快一下，小心別中暑喔！")
             }
         }
 
         if !humidityRange.contains(humidity) {
             if humidity < humidityRange.lowerBound {
-                return (false, "太乾燥了！建議加濕 🌵", "目前濕度 \(Int(humidity))%，低於建議範圍 (40~70%)。\n空氣乾燥可能影響呼吸道或皮膚，建議使用加濕器。")
+                return (false, "🌵 空氣有點乾乾的～", "濕度只有 \(Int(humidity))%，鼻子和皮膚可能會乾乾癢癢的。\n可以開加濕器幫\(rawValue)保濕一下喔！")
             } else {
-                return (false, "太潮濕了！建議除濕 💧", "目前濕度 \(Int(humidity))%，高於建議範圍 (40~70%)。\n潮濕容易滋生黴菌與塵蟎，建議開啟除濕機。")
+                return (false, "💧 濕氣太重啦～", "濕度高達 \(Int(humidity))%，這種天氣容易長黴菌，\(rawValue)皮膚也容易出問題。\n趕快開除濕機乾爽一下吧！")
             }
         }
 
-        return (true, "環境舒適，適合\(rawValue)休息 😴", "溫濕度皆在舒適範圍內！\n(溫度 \(Int(tempRange.lowerBound))~\(Int(tempRange.upperBound))°C，濕度 40~70%)\n\(rawValue)現在應該感到很放鬆。")
+        return (true, "✨ 完美！超舒服的環境～", "溫度和濕度都剛剛好！\(rawValue)現在一定覺得很放鬆、很開心。\n是個適合睡懶覺的好時光呢 💤")
     }
 }

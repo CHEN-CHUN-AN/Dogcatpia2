@@ -12,8 +12,9 @@ final class BlynkService {
     static let shared = BlynkService()
 
     private var token: String {
-        UserDefaults.standard.string(forKey: "blynkToken") ?? "YOUR_BLYNK_TOKEN"
+        UserDefaults.standard.string(forKey: "blynkToken") ?? "JyGCQW9FRjI7AMHb1Io95P4YZVWh49Is"
     }
+
 
     private var tempPin: String {
         UserDefaults.standard.string(forKey: "tempPin") ?? "V0"

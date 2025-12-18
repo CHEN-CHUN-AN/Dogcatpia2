@@ -15,13 +15,15 @@ final class TodoItem {
     var isCompleted: Bool
     var createdAt: Date
     var reminderTime: Date?
+    var sortOrder: Int
 
-    init(title: String, isCompleted: Bool = false, createdAt: Date = .now, reminderTime: Date? = nil) {
+    init(title: String, isCompleted: Bool = false, createdAt: Date = .now, reminderTime: Date? = nil, sortOrder: Int = 0) {
         self.id = UUID()
         self.title = title
         self.isCompleted = isCompleted
         self.createdAt = createdAt
         self.reminderTime = reminderTime
+        self.sortOrder = sortOrder
     }
 }
 

@@ -10,6 +10,13 @@ import SwiftData
 
 @main
 struct Dogcatpia2App: App {
+    @Environment(\.scenePhase) private var scenePhase
+
+    init() {
+        NotificationService.shared.requestPermission()
+        BackgroundTaskService.shared.registerBackgroundTask()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -19,5 +26,10 @@ struct Dogcatpia2App: App {
             EnvironmentRecord.self,
             TodoItem.self
         ])
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .background {
+                BackgroundTaskService.shared.scheduleAppRefresh()
+            }
+        }
     }
 }

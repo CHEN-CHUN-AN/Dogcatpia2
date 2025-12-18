@@ -11,6 +11,7 @@ import SwiftData
 struct DashboardView: View {
 
     @Environment(\.modelContext) private var context
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var vm = DashboardViewModel()
 
     var body: some View {
@@ -66,12 +67,6 @@ struct DashboardView: View {
                         .background(status.isComfortable ? Color.green.opacity(0.1) : Color.orange.opacity(0.1))
                         .cornerRadius(12)
                         .padding(.horizontal)
-
-                        Button("更新資料") {
-                            Task { await vm.refresh(context: context) }
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .padding(.top)
                     }
                     .padding(.vertical)
                 }
@@ -83,6 +78,9 @@ struct DashboardView: View {
                         }
                     }
                 }
+            }
+            .onAppear {
+                vm.startAutoRefresh(context: context)
             }
             .tabItem {
                 Label("首頁", systemImage: "house.fill")

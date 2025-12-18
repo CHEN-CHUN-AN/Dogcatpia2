@@ -17,6 +17,26 @@ final class DashboardViewModel: ObservableObject {
     @Published var pet: PetType = .cat
     @Published var errorMessage: String?
 
+    private var timerTask: Task<Void, Never>?
+
+    func startAutoRefresh(context: ModelContext) {
+        // 防止重複啟動
+        stopAutoRefresh()
+
+        timerTask = Task {
+            while !Task.isCancelled {
+                await refresh(context: context)
+                // 等待 2 秒
+                try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+            }
+        }
+    }
+
+    func stopAutoRefresh() {
+        timerTask?.cancel()
+        timerTask = nil
+    }
+
     func refresh(context: ModelContext) async {
         do {
             let (t, h) = try await BlynkService.shared.fetchData()
