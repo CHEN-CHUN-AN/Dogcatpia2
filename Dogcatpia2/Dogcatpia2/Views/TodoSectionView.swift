@@ -284,7 +284,7 @@ struct TodoRowView: View {
                     HStack(spacing: 4) {
                         Image(systemName: reminder < Date() ? "bell.slash" : "bell.fill")
                             .font(.caption2)
-                        Text(reminder.formatted(date: .abbreviated, time: .shortened))
+                        Text(DateService.reminderDisplay(reminder))
                             .font(.caption2)
                     }
                     .foregroundStyle(reminder < Date() ? .red : .blue)
@@ -404,4 +404,3 @@ struct EditTodoSheet: View {
         .modelContainer(for: TodoItem.self, inMemory: true)
         .padding()
 }
-

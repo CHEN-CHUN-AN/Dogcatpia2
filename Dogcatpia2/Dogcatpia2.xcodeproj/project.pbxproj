@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AC7DF57F2EFA2C0700ED4582 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = AC7DF57E2EFA2C0700ED4582 /* SwiftDate */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		ACDE7E0C2EF127590075E1D7 /* Dogcatpia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dogcatpia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC7DF57F2EFA2C0700ED4582 /* SwiftDate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = Dogcatpia2;
 			packageProductDependencies = (
+				AC7DF57E2EFA2C0700ED4582 /* SwiftDate */,
 			);
 			productName = Dogcatpia2;
 			productReference = ACDE7E0C2EF127590075E1D7 /* Dogcatpia2.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = ACDE7E032EF127590075E1D7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AC7DF57D2EFA2C0700ED4582 /* XCRemoteSwiftPackageReference "SwiftDate" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ACDE7E0D2EF127590075E1D7 /* Products */;
 			projectDirPath = "";
@@ -328,6 +337,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC7DF57D2EFA2C0700ED4582 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC7DF57E2EFA2C0700ED4582 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC7DF57D2EFA2C0700ED4582 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ACDE7E042EF127590075E1D7 /* Project object */;
 }

@@ -14,7 +14,7 @@ struct TemperatureChartView: View {
     @Query private var records: [EnvironmentRecord]
 
     init() {
-        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let startOfDay = DateService.startOfToday()
         _records = Query(filter: #Predicate<EnvironmentRecord> { record in
             record.timestamp >= startOfDay
         }, sort: \EnvironmentRecord.timestamp)

@@ -25,7 +25,7 @@ struct DiaryView: View {
                 ForEach(entries) { entry in
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text(entry.date.formatted(date: .numeric, time: .shortened))
+                            Text(DateService.diaryListDisplay(entry.date))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                             Spacer()
@@ -137,4 +137,3 @@ struct AddDiaryView: View {
     DiaryView()
         .modelContainer(for: DiaryEntry.self, inMemory: true)
 }
-

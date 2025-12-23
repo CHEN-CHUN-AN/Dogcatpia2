@@ -6,6 +6,7 @@
 //
 
 import UserNotifications
+import SwiftDate
 
 final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
 
@@ -50,7 +51,17 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         content.body = title
         content.sound = .default
 
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        // Normalize the date in the app's region before extracting components.
+        let d = date.in(region: DateService.region)
+        let components = DateComponents(
+            calendar: d.region.calendar,
+            timeZone: d.region.timeZone,
+            year: d.year,
+            month: d.month,
+            day: d.day,
+            hour: d.hour,
+            minute: d.minute
+        )
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
 
         let request = UNNotificationRequest(identifier: id.uuidString, content: content, trigger: trigger)
