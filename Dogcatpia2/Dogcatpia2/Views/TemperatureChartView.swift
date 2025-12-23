@@ -29,19 +29,13 @@ struct TemperatureChartView: View {
                 )
                 .foregroundStyle(.orange)
                 .interpolationMethod(.catmullRom)
-
-                LineMark(
-                    x: .value("時間", r.timestamp),
-                    y: .value("濕度", r.humidity)
-                )
-                .foregroundStyle(.blue)
-                .interpolationMethod(.catmullRom)
             }
         }
         .chartForegroundStyleScale([
-            "溫度": .orange,
-            "濕度": .blue
+            "溫度": .orange
         ])
         .frame(height: 200)
     }
 }
+
+
